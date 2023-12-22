@@ -3,10 +3,12 @@ import MainLayout from "../Layout/mainLayout";
 import Home from "../Pages/Home/Home";
 import Login from "../Pages/Login/Login";
 import SignUp from "../Pages/SignUp/SignUp";
-import Audience from "../Pages/Audience/Audience";
 import DashboardLayout from "../Layout/DashboardLayout";
 import NewTasks from "../Pages/Dashboard/NewTasks/NewTasks";
 import MyTasks from "../Pages/Dashboard/MyTasks/MyTasks";
+import UpdateTasks from "../Pages/Dashboard/UpdateTasks/UpdateTasks";
+import AboutUs from "../Pages/AboutUs/AboutUs";
+import PrivateRoutes from "./PrivateRoutes";
 
 export const router = createBrowserRouter([
     {
@@ -18,8 +20,8 @@ export const router = createBrowserRouter([
                 element: <Home></Home>
             },
             {
-                path: '/Audience',
-                element: <Audience></Audience>
+                path: '/aboutUs',
+                element: <AboutUs></AboutUs>
             },
             {
                 path: '/login',
@@ -34,15 +36,20 @@ export const router = createBrowserRouter([
     },
     {
         path: '/dashboard',
-        element: <DashboardLayout></DashboardLayout>,
+        element: <PrivateRoutes><DashboardLayout></DashboardLayout> </PrivateRoutes>,
         children:[
             {
                 path: 'newTask',
-                element: <NewTasks></NewTasks>
+                element: <PrivateRoutes><NewTasks></NewTasks></PrivateRoutes>
             },
             {
-                path: 'myTask',
-                element: <MyTasks></MyTasks>
+                path: '/dashboard',
+                element: <PrivateRoutes>x<MyTasks></MyTasks></PrivateRoutes>
+            },
+            {
+                path: 'updateTask/:id',
+                element: <PrivateRoutes><UpdateTasks></UpdateTasks></PrivateRoutes>,
+                loader: ({ params }) => fetch(`https://task-management-platform-server-beryl.vercel.app/tasks/${params.id}`)
             }
         ]
     }

@@ -3,6 +3,7 @@ import logo from "../../../assets/logo.png";
 import { motion } from "framer-motion";
 import useAuth from "../../../Hooks/useAuth";
 import { useState } from "react";
+import { IoIosMenu } from "react-icons/io";
 
 const Navbar = () => {
     const { user, logOut } = useAuth();
@@ -26,7 +27,7 @@ const Navbar = () => {
     const navLinks = [
         { to: "/", label: "Home" },
         { to: "/dashboard", label: "Dashboard" },
-        { to: "/Audience", label: "Audience" },
+        { to: "/aboutUs", label: "About Us" },
     ];
 
     const nav = navLinks.map((link) => (
@@ -50,25 +51,12 @@ const Navbar = () => {
         <div className="navbar fixed z-50 max-w-[1200px] bg-blue-200 opacity-90">
             <div className="navbar-start">
                 <div className="dropdown">
-                    <div tabIndex={0} role="button" className="btn lg:hidden">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-5 w-5"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                        >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth="2"
-                                d="M4 6h16M4 12h8m-8 6h16"
-                            />
-                        </svg>
+                    <div tabIndex={0} role="button" className="btn lg:hidden bg-transparent border-none">
+                        <IoIosMenu className="text-3xl text-black"></IoIosMenu>
                     </div>
                     <ul
                         tabIndex={0}
-                        className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+                        className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-white rounded-box w-52"
                     >
                         {nav}
                     </ul>
@@ -95,11 +83,11 @@ const Navbar = () => {
             <div className="navbar-end hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">{nav}</ul>
             </div>
-            <div className="mr-5 flex items-center">
+            <div className="mr-5 flex items-center mx-auto">
                 {user ? (
                     <>
-                        <div className="avatar flex-col mr-5">
-                            <div className="w-14 h-14 rounded-full ring ring-primary mx-auto">
+                        <div className="avatar flex-col mr-5 hidden md:flex">
+                            <div className="w-14 h-14 rounded-full ring ring-primary mx-auto ">
                                 <img
                                     src={user?.photoURL}
                                     alt="User Avatar"

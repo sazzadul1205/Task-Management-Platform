@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import "./Home.css"
+import Audience from '../Audience/Audience';
 
 const Home = () => {
     return (
@@ -11,11 +12,14 @@ const Home = () => {
                         <p className="text-lg mb-8">
                             We are dedicated to providing an innovative task management platform to enhance and improve your productivity.
                         </p>
-                        <Link to="/login" className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
+                        <Link to="/dashboard" className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
                             Let’s Explore
                         </Link>
                     </div>
                 </div>
+            </div>
+            <div>
+                <Audience></Audience>
             </div>
         </div>
     );

@@ -1,16 +1,18 @@
 import { NavLink, Outlet } from "react-router-dom";
+import useAuth from "../Hooks/useAuth";
 
 const DashboardLayout = () => {
+    const { user } = useAuth();
 
     const navLinks = [
         { to: "/", label: "Home" },
         { to: "/dashboard", label: "Dashboard" },
-        { to: "/Audience", label: "Audience" },
+        { to: "/aboutUs", label: "About Us" },
     ];
 
     const DashboardNavLink = [
+        { to: "/dashboard", label: "My Tasks" },
         { to: "newTask", label: "Add New Tasks" },
-        { to: "myTask", label: "My Tasks" },
     ];
 
     const nav = navLinks.map((link) => (
@@ -51,6 +53,18 @@ const DashboardLayout = () => {
             {/* Dashboard side bar */}
             <div className="w-64 min-h-screen bg-blue-200 pt-10 fixed">
                 <h1 className="text-center text-2xl font-bold text-blue-800 ">Dashboard</h1>
+                <div className="avatar flex-col mr-5 hidden md:flex mt-10">
+                    <div className="w-14 h-14 rounded-full ring ring-primary mx-auto ">
+                        <img
+                            src={user?.photoURL}
+                            alt="User Avatar"
+                            className="object-cover rounded-full"
+                        />
+                    </div>
+                    <h2 className="text-sm text-center text-black">
+                        {user?.displayName}
+                    </h2>
+                </div>
                 <ul className="menu p-4">
                     <ul className="menu menu-vertical px-1 text-blue-800 ">
                         {DashboardNav}
